@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +7,53 @@
   <title>我的画板</title>
   <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
   <main>
-    <canvas id="canvas" class="qwer" width="300" height="300"></canvas>
+    <canvas id="canvas">
+    </canvas>
     <div id="actions" class="actions">
-      <button id="eraser">橡皮擦</button>
       <button id="brush">画笔</button>
+      <button id="eraser">橡皮擦</button>
     </div>
   </main>
   <script src="./main.js"></script>
 </body>
+</html>
+
+<!-- 
+
+1.先在canvas上面监听鼠标down，move，up实现canvas上画线。
+  1.1.其中把canvas划圆和画线封装成函数
+  1.2.需要var using = false这个变量来控制，按下鼠标并且移动才会画线。
+      要不然移动和按下都会画线，而且up如果没有using = false的话会一直画
+2.屏幕有个bug需要改一下，要不然不会自适应
+3.加入橡皮擦功能
+  3.1.需要用div包住brush的button和eraser的button
+  3.2.brush、eraser需要和canvas绝对定位，div绝对定位就行了。
+  3.3.用到一个套路默认把brush隐藏，显示eraser点一下以后显示brush
+    3.3.1.用到一个和using=false一样的变量eraserEnable来实现点一下切换
+    3.3.2.切换成功以后鼠标监听里面应该是擦掉而不是画线。所以监听里面和橡皮檫
+          也是有逻辑关系的，所以eraserEnable也要和using 一起用到监听函数里面。
+4.实现手机也能用
+ 4.1.name="viewport"让手机不缩放web的页面，让他一比一显示。 
+ 4.2.手机端用touch监听事件，相对于网页端的mouse监听事件
+  4.2.1.怎么判断当前是手机还是电脑。而且电脑有些也能触屏。所以不能根据是不是手机而
+        选择监听touch或者mouse。所以要判断是否支持touch事件。
+  4.2.2.我用canvas.ontouchstart = function(b){console.log(b)}开发者工具中在web
+        下面点击canvas没反应，在手机模式下点击canvas可以打印TouchEvent这个事件。
+        说明PC是不支持touch事件，手机是支持touch事件的。所以只要判断支不支持touch
+        事件就行了。
+  4.2.3.怎么判断呢？
+   4.2.3.1.in操作符：
+            var hash = {a:1,b:2,c:3}
+            'a' in hash // true
+            'd' in hash // false
+          所以用'ontouchstart' in document.body // true
+   4.2.3.2. document.body.ontouchstate !== undefind // true
+   4.2.3.3. mouse事件坐标在mouseEvent的clientX，Y里面。touch事件坐标在touches[0].clientX，Y里面
+  4.3.4.然后把listenToMouse改为listenToUser
+5.前端pc和手机相通的，小差异变通一下即可
+
+
+
+-->

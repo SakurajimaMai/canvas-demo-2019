@@ -1,25 +1,19 @@
 body{
-  margin:0px;
+  margin: 0px;
 }
 #canvas{
-  background: gray;
-  display:block;
-  /* width: 100vw;
-  height: 100vh */ 
-  /* 想要canvas和页面一样宽高不能用css去调，因为canvas和图片一样只是等比例放大。
-  所以强行变大的话画出来的东西有问题的 */
+  background:grey;
+  /* position: relative; */
+  display: block;
 }
 #actions{
-  position: fixed;/* 不知道为什么要用fixed不用relative */
-  bottom: 0px;
+  position: fixed;
   left: 0px;
+  bottom: 0px;
 }
-.actions > #brush{
+.actions >#brush{
   display: none;
 }
-/* 两个.actions.x会同时存在。两个看作一个整体，要么.actions的状态那么画笔隐藏
-要么是.actions的状态画笔出现，橡皮擦隐藏 
-另外.x的状态默认会优先级比较低。因为我测了brush的两种状态都存在，是显示画笔隐藏的*/
 .actions.x >#brush{
   display: inline-block;
 } 
