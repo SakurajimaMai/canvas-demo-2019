@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,42 @@
   <title>我的画板</title>
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
   <main>
     <canvas id="canvas">
     </canvas>
     <div id="actions" class="actions">
-      <button id="brush">画笔</button>
-      <button id="eraser">橡皮擦</button>
+      <svg id="pen" class="active icon">
+        <use xlink:href="#icon-pen"></use>
+      </svg>
+      <svg id="eraser" class="icon">
+        <use xlink:href="#icon-eraser"></use>
+      </svg>
+      <svg id="clear" class="icon">
+        <use xlink:href="#icon-delete"></use>
+      </svg>
+      <svg id="download" class="icon">
+        <use xlink:href="#icon-download"></use>
+      </svg>
     </div>
+    <ol class="colors">
+      <li id="black" class="active black"></li>
+      <li id="red" class="red"></li>
+      <li id="green" class="green"></li>
+      <li id="blue" class="blue"></li>
+    </ol>
+    <ol class="sizes">
+      <li id="thin" class="thin"></li>
+      <li id="thick" class="thick"></li>
+    </ol>
+    <!-- 方方喜欢js只用id，css只用class -->
   </main>
   <script src="./main.js"></script>
-  <script src="//at.alicdn.com/t/font_1109729_781dm9k2z6r.js"></script>
+  <script src="//at.alicdn.com/t/font_1109729_iykbnvhvmpk.js"></script>
 
 </body>
+
 </html>
 
 <!-- 
@@ -58,8 +82,24 @@
 6.iconfont.cn找图标
   6.1.去色生成symbol代码后复制js代码。放到html中用script标签src包起来。
   6.2.使用帮助symbol引用。
-  6.3.svg放到html的action里面。然后修改点击画笔和橡皮擦的代码。
+  6.3.svg放到html的action里面。然后修改点击画笔和橡皮擦的html/css/js代码。
+  6.4.用classList.add('active')这个事件
+      让画笔和橡皮点击的时候可以变红，并且点另外一个的时候变红消失。点击的时候还能变大。
+      默认是画笔变红变大（在pen的class里面加入active事件）
+      再让切换过程平滑一点
+7.画笔多种颜色
+  7.1.和上面画笔的div并列创建一个ol列表，然后用css把3个圆给做出来。背景分别是红绿蓝
+  7.2.用onclick事件，做到点哪个哪个就变大。和上面点画笔就变大一样。需要用一个api生成active
+      这个class，会自动加到li上的。但是html里面看不出来，用开发者工具就能看到了，点击的时候
+      会加一个class。然后css把class = active的样式写好。
+  7.3.然后在click事件里面改变画笔的颜色，fillstyle和strokestyle。这样就不用去画圆和画线
+      的代码里去改了。所以高级工程师就层次明了。让复杂的逻辑变简单。不同算法产生bug肯定不一样的
+8.笔变粗
+  8.1.再起一个ol，设置宽度和border-top就行了。
+  8.2.给ol下的li一个id，然后用id.onclick控制点击线的事件。效果是点击线就改变圆和直线的宽度
+      需要一个定义一个变量lineWidth，这个变量有个默认值就是细线的，然后点击粗线就改变这个值。
+9.删除
 
-
-
+10.下载
+  和删除一个把icon弄好，就几句代码
 -->
